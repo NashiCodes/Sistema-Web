@@ -1,5 +1,6 @@
 package com.ldsw.dcc192;
 
+import com.ldsw.dcc192.DAO.DaoUsuario;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,13 +11,13 @@ import java.io.IOException;
 
 @WebServlet(name = "Login", value = "/Login")
 public class Login extends HttpServlet {
-	private String allowedUser;
-	private String allowedPassword;
+	private String _adminUser;
+	private String _adminPassword;
 
 	@Override
 	public void init() {
-		this.allowedUser = getInitParameter("admin-user");
-		this.allowedPassword = getInitParameter("admin-password");
+		this._adminUser = getInitParameter("admin-user");
+		this._adminPassword = getInitParameter("admin-password");
 	}
 
 	@Override
@@ -38,22 +39,41 @@ public class Login extends HttpServlet {
 
 		if (username == null || password == null || username.isEmpty() || password.isEmpty())
 			response.sendRedirect("");
-		else if (username.equals(allowedUser) && password.equals(allowedPassword)) {
-			try {
-				request.getSession(true).setAttribute("logged", username);
-				response.sendRedirect("menu.jsp");
-			} catch (Exception e) {
-				request.getSession(true).setAttribute("error", "Erro: " + e.getMessage());
-				response.sendRedirect("");
-			}
+		else if (username.equals(_adminUser) && password.equals(_adminPassword)) {
+			loginAdm(request, response, username);
 		} else {
-			try {
-				request.getSession(true).setAttribute("error", "Usuário ou senha inválidos");
-				response.sendRedirect("");
-			} catch (Exception e) {
-				Console console = System.console();
-				console.printf("Erro: %s", e.getMessage());
-			}
+			var Usuario = DaoUsuario.buscarPorMatricula(username);
+			if (Usuario != null && Usuario.getSenha().equals(password))
+				login(request, response, Usuario);
+			return;
+		}
+		try {
+			request.getSession(true).setAttribute("error", "Usuário ou senha inválidos");
+			response.sendRedirect("");
+		} catch (Exception e) {
+			Console console = System.console();
+			console.printf("Erro: %s", e.getMessage());
 		}
 	}
+
+	private void loginAdm(HttpServletRequest request, HttpServletResponse response, String admin) throws IOException {
+		try {
+			request.getSession(true).setAttribute("logged", admin);
+			response.sendRedirect("menu.jsp");
+		} catch (Exception e) {
+			request.getSession(true).setAttribute("error", "Erro: " + e.getMessage());
+			response.sendRedirect("");
+		}
+	}
+
+	private void login(HttpServletRequest request, HttpServletResponse response, com.ldsw.dcc192.Models.Usuario usuario) throws IOException {
+		try {
+			request.getSession(true).setAttribute("logged", usuario.getMatricula());
+			response.sendRedirect("menu.jsp");
+		} catch (Exception e) {
+			request.getSession(true).setAttribute("error", "Erro: " + e.getMessage());
+			response.sendRedirect("");
+		}
+	}
+
 }

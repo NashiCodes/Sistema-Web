@@ -15,11 +15,28 @@
             <param-value>admin</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>com.ldsw.dcc192.Controllers.Controller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/Controller</url-pattern>
+    </servlet-mapping>
+    <filter-mapping>
+        <filter-name>Filtro</filter-name>
+        <url-pattern>/menu.jsp</url-pattern>
+        <url-pattern>/welcome.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter>
+        <filter-name>Filtro</filter-name>
+        <filter-class>com.ldsw.dcc192.Controllers.PagesFilter</filter-class>
+    </filter>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

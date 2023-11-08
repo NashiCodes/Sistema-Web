@@ -20,7 +20,7 @@ public class Controller extends HttpServlet {
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        var session = request.getSession(true);
+        var session = request.getSession(false);
         String loggedIn;
         RequestDispatcher rd;
         String action = request.getParameter("action");
@@ -62,8 +62,8 @@ public class Controller extends HttpServlet {
                 case "logout":
                     loggedIn = (String) session.getAttribute("logged");
                     if (loggedIn != null && loggedIn.equals("true")) {
-                        session.setAttribute("logged", "false");
-                        session.setAttribute("user", null);
+                        session.removeAttribute("logged");
+                        session.removeAttribute("user");
                         rd = request.getRequestDispatcher("logout.jsp");
                         rd.forward(request, response);
                     } else {
@@ -74,6 +74,10 @@ public class Controller extends HttpServlet {
                     break;
                 case "welcome":
                     rd = request.getRequestDispatcher("welcome.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "menu":
+                    rd = request.getRequestDispatcher("menu.jsp");
                     rd.forward(request, response);
                     break;
                 default:

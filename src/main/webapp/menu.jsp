@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Logged as <%= session.getAttribute("user") %>
+<h1>Logged as <%= request.getSession().getAttribute("user") %>
 </h1>
 <form action="Controller" method="post">
     <input type="submit" name="action" value="welcome" placeholder="Voltar">

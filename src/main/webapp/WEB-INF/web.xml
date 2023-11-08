@@ -37,6 +37,9 @@
         <filter-name>Filtro</filter-name>
         <filter-class>com.ldsw.dcc192.Controllers.PagesFilter</filter-class>
     </filter>
+    <listener>
+        <listener-class>com.ldsw.dcc192.Controllers.Listener</listener-class>
+    </listener>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

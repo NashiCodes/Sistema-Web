@@ -20,7 +20,7 @@ public class Controller extends HttpServlet {
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        var session = request.getSession(false);
+        var session = request.getSession();
         String loggedIn;
         RequestDispatcher rd;
         String action = request.getParameter("action");

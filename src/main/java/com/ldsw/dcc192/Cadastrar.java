@@ -1,8 +1,7 @@
 package com.ldsw.dcc192;
 
-import com.ldsw.dcc192.DAO.DaoUsuario;
+import com.ldsw.dcc192.dao.DaoUsuario;
 import com.ldsw.dcc192.Models.Usuario;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ public class Cadastrar extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		var matricula = request.getParameter("registration");
+		var matricula = request.getParameter("user");
 		var senha = request.getParameter("password");
 		var confirm = request.getParameter("confirm");
 
@@ -27,8 +26,9 @@ public class Cadastrar extends HttpServlet {
 			if (senha.equals(confirm)) {
 				try {
 					DaoUsuario.inserir(new Usuario(matricula, senha));
-					request.getSession(true).setAttribute("logged", matricula);
-					response.sendRedirect("menu.jsp");
+					request.getSession(true).setAttribute("user", matricula);
+					request.getSession(true).setAttribute("logged", "true");
+					response.sendRedirect("welcome.jsp");
 				} catch (Exception e) {
 					request.getSession(true).setAttribute("error", "Erro: " + e.getMessage());
 					response.sendRedirect("cadastro.jsp");

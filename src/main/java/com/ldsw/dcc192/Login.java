@@ -1,6 +1,6 @@
 package com.ldsw.dcc192;
 
-import com.ldsw.dcc192.DAO.DaoUsuario;
+import com.ldsw.dcc192.dao.DaoUsuario;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,16 +1,18 @@
-<%@ page import="java.util.Timer" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <jsp:include page="Components/bootstrap.html"/>
 </head>
 <body>
-<h1>Logged as <%= request.getSession().getAttribute("user") %>
-</h1>
+<jsp:include page="Components/navbar.jsp"/>
 <form action="Controller" method="post">
-    <input type="submit" name="action" value="welcome" placeholder="Voltar">
-    <input type="submit" name="action" value="cadastrar" placeholder="Cadastrar Novo Usuario">
+    <button type="submit" class="btn btn-primary btn-rounded" name="action" value="counter">Contador de Usuario</button>
+    <button type="submit" class="btn btn-primary btn-rounded" name="action" value="list">Listar Usuarios</button>
+    <button type="submit" class="btn btn-primary btn-rounded" name="action" value="add">Adicionar Usuario</button>
+    <button type="submit" class="btn btn-warning btn-rounded" name="action" value="erro">Warning</button>
     <input type="submit" name="action" value="logout" placeholder="Logout">
 </form>
 </body>

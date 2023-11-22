@@ -17,11 +17,19 @@
     </servlet>
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>com.ldsw.dcc192.Controllers.Controller</servlet-class>
+        <servlet-class>com.ldsw.dcc192.controllers.Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cadastrar</servlet-name>
+        <servlet-class>com.ldsw.dcc192.Cadastrar</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cadastrar</servlet-name>
+        <url-pattern>/Cadastrar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
@@ -35,16 +43,16 @@
     </filter-mapping>
     <filter>
         <filter-name>Filtro</filter-name>
-        <filter-class>com.ldsw.dcc192.Controllers.PagesFilter</filter-class>
+        <filter-class>com.ldsw.dcc192.controllers.PagesFilter</filter-class>
     </filter>
     <listener>
-        <listener-class>com.ldsw.dcc192.Controllers.Listener</listener-class>
+        <listener-class>com.ldsw.dcc192.controllers.Listener</listener-class>
     </listener>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <session-config>
-        <session-timeout>1</session-timeout>
+        <session-timeout>0</session-timeout>
     </session-config>
     <error-page>
         <error-code>404</error-code>

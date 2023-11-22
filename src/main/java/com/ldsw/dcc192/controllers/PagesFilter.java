@@ -1,4 +1,4 @@
-package com.ldsw.dcc192.Controllers;
+package com.ldsw.dcc192.controllers;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,10 +32,10 @@ public class PagesFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         var session = ((HttpServletRequest) request).getSession(true);
-        var loggedIn = (String) session.getAttribute("loggedIn");
+        var loggedIn = (String) session.getAttribute("logged");
         var path = ((HttpServletRequest) request).getRequestURI();
         RequestDispatcher rd;
-        if (loggedIn == null || !loggedIn.equals("TRUE")) {
+        if (loggedIn == null || !loggedIn.equals("true")) {
             if (path.contains("index.jsp")) {
                 chain.doFilter(request, response);
             } else {

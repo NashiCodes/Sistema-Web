@@ -1,4 +1,4 @@
-package com.ldsw.dcc192.Controllers;
+package com.ldsw.dcc192.controllers;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
@@ -15,8 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Listener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
 
-    public static AtomicInteger usuarios = new AtomicInteger(0);
-    public ServletContext context = null;
+    public static final AtomicInteger usuarios = new AtomicInteger(0);
+    public ServletContext context;
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
@@ -50,7 +50,8 @@ public class Listener implements ServletContextListener, HttpSessionListener, Ht
     }
 
     @Override
-    public void attributeRemoved(HttpSessionBindingEvent event) {System.out.println(">>> Attribute Removed: " + event.getName());
+    public void attributeRemoved(HttpSessionBindingEvent event) {
+        System.out.println(">>> Attribute Removed: " + event.getName());
         if (event.getName().equals("user")) {
             usuarios.decrementAndGet();
             context.setAttribute("userCount", usuarios.get());

@@ -1,4 +1,4 @@
-package com.ldsw.dcc192.DAO;
+package com.ldsw.dcc192.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
